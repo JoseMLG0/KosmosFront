@@ -1,0 +1,55 @@
+<div class="form-container">
+  <h1>Registrar Cita</h1>
+  <form [formGroup]="citaForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre Paciente</mat-label>
+      <input matInput formControlName="nombre">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Apellido Paterno Paciente</mat-label>
+      <input matInput formControlName="apellidoPaterno">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Apellido Materno Paciente</mat-label>
+      <input matInput formControlName="apellidoMaterno">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Doctor</mat-label>
+      <mat-select formControlName="doctorId">
+        <mat-option *ngFor="let doctor of doctores" [value]="doctor.id">
+          {{ doctor.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Consultorio</mat-label>
+      <mat-select formControlName="consultorioId">
+        <mat-option *ngFor="let consultorio of consultorios" [value]="consultorio.id">
+          {{ consultorio.numero }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="datepicker" formControlName="fecha" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancelar</button>
+          <button mat-raised-button matDatepickerApply>Aceptar</button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Hora</mat-label>
+      <input matInput formControlName="hora" type="time" />
+      <mat-hint>Ejemplo: 01:35 p.m.</mat-hint>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="citaForm.invalid">Registrar Cita</button>
+  </form>
+</div>
